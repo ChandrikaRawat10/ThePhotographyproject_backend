@@ -26,17 +26,8 @@ public class UserDetailsService {
 	}
 	
 	
-	public String authenticateUser(String username, String password) {
-		User user = userRepo.findByUsername(username);
-		
-		if(user == null) {
-			return "User not found";
-		}
-		
-		if(!user.getPassword().equals(password)) {
-			return "Invalid password";
-		}
-		return "Login successfull";                       
-		
+	public boolean authenticateUser(String username, String password) {
+	    User user = userRepo.findByUsername(username);
+	    return user != null && user.getPassword().equals(password);
 	}
 }

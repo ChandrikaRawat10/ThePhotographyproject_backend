@@ -8,6 +8,7 @@ public class PhotographyProjectApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PhotographyProjectApplication.class, args);
+		
 	}
 
 }
