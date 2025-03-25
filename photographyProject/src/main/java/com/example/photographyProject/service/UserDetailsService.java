@@ -3,7 +3,8 @@ package com.example.photographyProject.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.photographyProject.model.User;
+import com.example.photographyProject.model.Customer;
+
 import com.example.photographyProject.repository.UserRepository;
 
 @Service
@@ -12,7 +13,7 @@ public class UserDetailsService {
 	@Autowired
 	private UserRepository userRepo;
 	
-	public String registerUser(User user) {
+	public String registerUser(Customer user) {
 		if(userRepo.findByUsername(user.getUsername()) != null) {
 			return "Username already taken";
 		}
@@ -27,7 +28,7 @@ public class UserDetailsService {
 	
 	
 	public boolean authenticateUser(String username, String password) {
-	    User user = userRepo.findByUsername(username);
+		Customer user = userRepo.findByUsername(username);
 	    return user != null && user.getPassword().equals(password);
 	}
 }

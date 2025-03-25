@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.photographyProject.model.User;
+import com.example.photographyProject.model.Customer;
 import com.example.photographyProject.service.UserDetailsService;
 
 import jakarta.validation.Valid;
@@ -25,7 +25,7 @@ public class AuthController {
 	private UserDetailsService userService;
 	
 	@PostMapping("/signup")
-	public ResponseEntity<Map<String, String>> signUp(@RequestBody User user) {
+	public ResponseEntity<Map<String, String>> signUp(@RequestBody Customer user) {
 	    String message = userService.registerUser(user);
 	    Map<String, String> response = new HashMap<>();
 	    response.put("message", message);
