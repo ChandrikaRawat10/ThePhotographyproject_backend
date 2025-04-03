@@ -25,6 +25,15 @@ public class UserDetailsService {
         return vendorRepository.findByEmail(email).isPresent();
     }
 
+    public boolean isEmailTaken(String email) {
+        return isCustomerExists(email) || isVendorExists(email);
+    }
+
+    public boolean isUsernameTaken(String username) {
+        return customerRepository.findByUsername(username).isPresent() || 
+               vendorRepository.findByUsername(username).isPresent();
+    }
+
     public void setCustomerVerified(String email) {
         Customer user = customerRepository.findByEmail(email).orElseThrow();
         user.setVerified(true);
@@ -45,14 +54,25 @@ public class UserDetailsService {
         vendorRepository.save(vendor);
     }
 
-    // ✅ Implement authenticateUser method
-    public boolean authenticateUser(String email, String password) {
-        Optional<Customer> customer = customerRepository.findByEmail(email);
-        if (customer.isPresent()) {
-            return customer.get().getPassword().equals(password);
+    public boolean isUserExists(String email, String role) {
+        if (role.equalsIgnoreCase("customer")) {
+            return isCustomerExists(email);
+        } else if (role.equalsIgnoreCase("vendor")) {
+            return isVendorExists(email);
         }
+        return false;
+    }
 
-        Optional<ServiceProvider> vendor = vendorRepository.findByEmail(email);
-        return vendor.isPresent() && vendor.get().getPassword().equals(password);
+    public boolean authenticateUser(String email, String password, String role) {
+        if (role.equalsIgnoreCase("customer")) {
+            return customerRepository.findByEmail(email)
+                .map(user -> user.getPassword().equals(password))
+                .orElse(false);
+        } else if (role.equalsIgnoreCase("vendor")) {
+            return vendorRepository.findByEmail(email)
+                .map(vendor -> vendor.getPassword().equals(password))
+                .orElse(false);
+        }
+        return false;
     }
 }

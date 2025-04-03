@@ -15,14 +15,16 @@ public class ServiceProvider {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false, unique = true)
-    private String name;
+    @Column(unique = true, nullable = false)
+    private String username;
 
     @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)
     private boolean isVerified = false; // New field for verification
+    
+    private String role = "vendor";
 
 	public Long getId() {
 		return id;
@@ -41,11 +43,11 @@ public class ServiceProvider {
 	}
 
 	public String getName() {
-		return name;
+		return username;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.username = name;
 	}
 
 	public String getPassword() {
@@ -62,6 +64,14 @@ public class ServiceProvider {
 
 	public void setVerified(boolean isVerified) {
 		this.isVerified = isVerified;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
     
 }

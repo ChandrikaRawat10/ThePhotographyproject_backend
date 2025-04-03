@@ -23,6 +23,8 @@ public class Customer {
 
     @Column(nullable = false)
     private boolean isVerified = false; // New field to track OTP verification status
+    
+    private String role = "customer";
 
 	public Long getId() {
 		return id;
@@ -63,5 +65,14 @@ public class Customer {
 	public void setVerified(boolean isVerified) {
 		this.isVerified = isVerified;
 	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
     
 }
