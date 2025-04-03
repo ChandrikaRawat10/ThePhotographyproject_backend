@@ -7,7 +7,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Customer {
+public class ServiceProvider {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,13 +16,13 @@ public class Customer {
     private String email;
 
     @Column(nullable = false, unique = true)
-    private String username; // Ensure username is stored
+    private String name;
 
     @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)
-    private boolean isVerified = false; // New field to track OTP verification status
+    private boolean isVerified = false; // New field for verification
 
 	public Long getId() {
 		return id;
@@ -40,12 +40,12 @@ public class Customer {
 		this.email = email;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getName() {
+		return name;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPassword() {
